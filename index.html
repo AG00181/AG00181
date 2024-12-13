@@ -13,6 +13,17 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #6e8efb, #a777e3);
+      overflow: hidden;
+      animation: gradient-bg 5s infinite alternate;
+    }
+
+    @keyframes gradient-bg {
+      0% {
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+      }
+      100% {
+        background: linear-gradient(135deg, #a777e3, #6e8efb);
+      }
     }
 
     .form-container {
@@ -23,12 +34,37 @@
       width: 100%;
       max-width: 400px;
       position: relative;
+      transform: scale(0.8);
+      animation: form-pop 0.6s ease-out forwards;
+    }
+
+    @keyframes form-pop {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .form-container h2 {
       margin-bottom: 1rem;
       color: #333;
       text-align: center;
+      animation: fade-in 1s ease-out;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .form-group {
@@ -43,12 +79,14 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       outline: none;
-      transition: all 0.3s ease;
+      transition: all 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(255, 255, 255, 0.7);
     }
 
     .form-group input:focus {
       border-color: #6e8efb;
       box-shadow: 0 0 8px rgba(110, 142, 251, 0.5);
+      background: #fff;
     }
 
     .form-group label {
@@ -70,6 +108,18 @@
       color: #6e8efb;
       background: #fff;
       padding: 0 5px;
+      animation: label-pop 0.3s ease;
+    }
+
+    @keyframes label-pop {
+      0% {
+        transform: scale(1.1);
+        color: #a777e3;
+      }
+      100% {
+        transform: scale(1);
+        color: #6e8efb;
+      }
     }
 
     .form-group .error {
@@ -77,10 +127,26 @@
       font-size: 0.9rem;
       margin-top: 0.5rem;
       display: none;
+      animation: shake 0.3s ease;
     }
 
     .form-group.error .error {
       display: block;
+    }
+
+    @keyframes shake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(-5px);
+      }
+      50% {
+        transform: translateX(5px);
+      }
+      75% {
+        transform: translateX(-5px);
+      }
     }
 
     .submit-btn {
@@ -92,17 +158,22 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
 
     .submit-btn:hover {
       background: #5b76db;
+      transform: translateY(-3px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px);
     }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2>Sign Up -Amit</h2>
+    <h2>Sign Up</h2>
     <form id="animated-form">
       <div class="form-group">
         <input type="text" id="name" name="name" placeholder=" " required />
