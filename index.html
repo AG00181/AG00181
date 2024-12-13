@@ -1,19 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Form</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .form-container h2 {
+      margin-bottom: 1rem;
+      color: #333;
+      text-align: center;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: #6e8efb;
+      box-shadow: 0 0 8px rgba(110, 142, 251, 0.5);
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: #aaa;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 10px;
+      font-size: 0.8rem;
+      color: #6e8efb;
+      background: #fff;
+      padding: 0 5px;
+    }
+
+    .form-group .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .form-group.error .error {
+      display: block;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      color: #fff;
+      background: #6e8efb;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: #5b76db;
+    }
+  </style>
+</head>
 <body>
+  <div class="form-container">
+    <h2>Sign Up</h2>
+    <form id="animated-form">
+      <div class="form-group">
+        <input type="text" id="name" name="name" placeholder=" " required />
+        <label for="name">Name</label>
+        <div class="error">Please enter your name</div>
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" name="email" placeholder=" " required />
+        <label for="email">Email</label>
+        <div class="error">Please enter a valid email</div>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" name="password" placeholder=" " required />
+        <label for="password">Password</label>
+        <div class="error">Please enter your password</div>
+      </div>
+      <button type="submit" class="submit-btn">Sign Up</button>
+    </form>
+  </div>
 
-<h2>HTML Forms</h2>
+  <script>
+    const form = document.getElementById('animated-form');
 
-<form action="/action_page.php">
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" value="John"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" value="Doe"><br><br>
-  <input type="submit" value="Submit">
-</form> 
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+      const inputs = form.querySelectorAll('input');
+      let isValid = true;
 
+      inputs.forEach((input) => {
+        const formGroup = input.parentElement;
+        if (!input.value.trim()) {
+          formGroup.classList.add('error');
+          isValid = false;
+        } else {
+          formGroup.classList.remove('error');
+        }
+      });
+
+      if (isValid) {
+        alert('Form submitted successfully!');
+        form.reset();
+      }
+    });
+  </script>
 </body>
 </html>
-
